@@ -9,6 +9,7 @@ public class Fraccion
     {
         Numerator = numerator;
         Denominator = denominator;
+        Simplify();
     }
 
     public Fraccion SumFraction(Fraccion fraccion)
@@ -43,6 +44,24 @@ public class Fraccion
         int denomitor = this.Denominator * fraccion.Numerator;
 
         return new Fraccion(numerator, denomitor);
+    }
+
+    public void Simplify()
+    {
+        int gdc = GDC(Numerator, Denominator);
+        Numerator /= gdc;
+        Denominator /= gdc;
+    }
+
+    private int GDC(int numerator, int denominator)
+    {
+        while (denominator != 0 )
+        {
+            int temp = denominator;
+            denominator = numerator % denominator;
+            numerator = temp;
+        }
+        return numerator;
     }
 
     public override string ToString()
